@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Insulin level</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--<link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Asul&display=swap" />
+  <link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap-5.0.1/css/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css" />
+  <script src="assets/vendor/jquery-3.6.0.min.js"></script>
+  <script src="assets/js/main.js"></script>-->
+
+
+  <style>
+    body {background-color: DarkSlateGrey;
+          padding-top: 190px;
+          padding-right: 30px;
+          padding-bottom: 50px;
+          padding-left: 350px;
+          font-size: 1.3em;
+          
+         
+         }
+         
+    #Firstcase, #Secondcase ,#Thirdcase { display: none;}
+    #first:checked ~ #Firstcase {display: block;} 
+    #second:checked ~ #Secondcase {display: block;}
+    #third:checked ~ #Thirdcase {display : block;}
+
+
+   
+      input[type=radio] {
+         appearance: none;
+         -webkit-appearance: none;
+         -moz-appearance: none;
+         padding: 10px;
+         background-color: LightSlateGrey;
+         border-radius:50%;
+      }
+      input[type=radio]:checked {
+         background-color:Gainsboro ;
+
+      }
+      input[type=radio]:hover {
+         cursor: pointer;}
+
+      input[type=number] {
+  
+      font-size:20px;
+       padding-left: 140px;
+       border: none;
+       border-bottom: 2px solid black;
+       margin: 4px 0;
+       background-color: DarkSlateGrey;
+       outline: none;
+}
+      input[type=number]:focus{
+      background-color: LightSlateGrey;
+   
+}
+.btn-danger {box;
+   border-radius: 4px;
+
+
+  background-color: LightSlateGrey ;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+.btn-danger:hover {
+  background-color:#A52A2A;
+  color: white;
+}
+.btn-success {
+  background-color: LightSlateGrey ;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+.btn-success:hover {
+  background-color:#2E8B57;
+  color:white;
+
+}
+
+
+
+      
+  </style>
+</head>
+
+<body>
+    
+
+  
+<form>
+
+   
+
+     
+      
+      <input type="radio" name="toggle" id="first" value="choice-1" required  checked>
+      <label for="choice">First test</label>
+       
+      <input type="radio" name="toggle" id="second" value="choice-2" required>
+      <label for="choice">Not first test</label>
+      
+      <input type="radio" name="toggle" id="third" value="choice-3" required>
+       <label for="choice">Previously suspended</label>
+       <br><br><br>
+   
+
+  
+    <div id="Firstcase">
+    <div class="col-sm-12 mb-3">
+      <div class="input-group">
+        <span class="input-group-text">Current BG</span>
+
+        <input type="number" id="current_BG1" name="current_BG" style="width: 12em" aria-label="current BG" min="1" max="999" step="1"  class="form-control" onsubmit="return false"  required>
+        <br><br>
+
+      </div>
+      </div>
+       <div class="col-sm-12 mb-3 pt-5 text-center">
+      <button type="reset" onclick="reload()" class="btn btn-lg btn-danger">Reset</button>
+      <button onclick="insulin1()" class="btn btn-lg btn-success">Calculate<span class="material-icons right-align"></span></button>
+
+        
+    </div>
+    <div class="res">
+        <h3 id="result1" style=" letter-spacing: 2px;"></h3>
+         </div>
+  
+      
+
+    </div>
+
+    <div id= "Secondcase">
+       <div class="col-sm-12 mb-3">
+      <div class="input-group">
+        <span class="input-group-text">Previous BG</span>
+
+        <input type="number" id="previous_BG2"  name="previous_BG"  style="width: 12em" aria-label="previous BG" min="1" max="999" step="1"  class="form-control" onsubmit="return false" required>
+
+
+      </div>
+    </div>
+
+    <div class="col-sm-12 mb-3">
+      <div class="input-group">
+        <span class="input-group-text">Current BG</span>
+
+        <input type="number" id="current_BG2" name="current_BG"  style="width: 12em" aria-label="current BG" min="1" max="999" step="1" class="form-control" onsubmit="return false" required>
+
+
+
+      </div>
+      </div>
+   
+
+    
+    <div class="col-sm-12 mb-3">
+      <div class="input-group">
+        <span class="input-group-text">Previous infusion rate</span>
+
+        <input type="number" id="pre_inf2" name="previous_rate"  style="width: 15em" aria-label="previous rate" min="1" max="999" step="1"  infusion rate" class="form-control" onsubmit="return false" required>
+
+         <br><br>
+
+
+      </div>
+    </div>
+
+     <div class="col-sm-12 mb-3 pt-5 text-center">
+      <button type="reset" onclick="reload()"  class="btn btn-lg btn-danger">Reset</button>
+      <button onclick="insulin2() "class="btn btn-lg btn-success">Calculate<span class="material-icons right-align"></span></button>
+    </div>
+    <div class="res">
+        <h3 id="result2" style=" letter-spacing: 2px;"></h3>
+         </div>
+  
+      
+
+  </div>
+ 
+ <div id="Thirdcase">
+   <div class="col-sm-12 mb-3">
+      <div class="input-group">
+        <span class="input-group-text">Current BG</span>
+
+        <input type="number" id="current_BG3" name="current_BG"  style="width: 12em" aria-label="current BG" min="1" max="999" step="1" class="form-control" onsubmit="return false" required>
+
+
+
+      </div>
+      </div>
+   
+
+    
+    <div class="col-sm-12 mb-3">
+      <div class="input-group">
+        <span class="input-group-text">Previous infusion rate before suspension</span>
+
+        <input type="number" id="pre_inf3" name="previous_rate"  style="width: 16em" aria-label="previous rate" min="1" max="999" step="1"  class="form-control" onsubmit="return false" required>
+
+         <br><br>
+
+
+      </div>
+    </div>
+     <div class="col-sm-12 mb-3 pt-5 text-center">
+      <button type="reset" onclick="reload()" class="btn btn-lg btn-danger">Reset</button>
+      <button onclick="insulin3() "class="btn btn-lg btn-success">Calculate<span class="material-icons right-align"></span></button>
+    </div>
+     
+     <div class="res">
+        <h3 id="result3" style=" letter-spacing: 2px;"></h3>
+         </div>
+   
+
+  </div>
+ 
+</form>
+  </div>
+
+  
+
+   
+
+
+
+
+
+
+
+
+   <script>
+  
+
+ 
+
+   function insulin1()
+   {
+     event.preventDefault();
+
+     var cubg=document.getElementById("current_BG1").value;
+      var inf_rate= parseInt (cubg/100);
+      document.getElementById("result1").innerHTML= "Infusion rate = "+inf_rate;
+     
+   }
+
+
+   function insulin3(){
+
+    event.preventDefault();
+    var cubg=document.getElementById("current_BG3").value;
+    var ini_rate=document.getElementById("pre_inf3").value;
+    var inf_rate;
+    if(cubg<=140){
+      inf_rate="Suspend Insulin." ;
+    }
+    else 
+    { var w=parseInt((50/100)*ini_rate);
+      if(w==0)
+      {
+        w++;
+      }
+      inf_rate=Number(ini_rate) - Number(w);
+      inf_rate="Infusion rate = "+inf_rate;
+
+
+    }
+
+  document.getElementById("result3").innerHTML=inf_rate;
+
+
+   }
+
+
+
+
+    function insulin2(){
+  
+  event.preventDefault();
+  //var weight=document.getElementById("weight");
+  var cubg=document.getElementById("current_BG2").value;
+  var prbg=document.getElementById("previous_BG2").value;
+  var ini_rate=document.getElementById("pre_inf2").value;
+//let ini_rate= parseInt ( prbg / 100);
+  
+  var inf_rate;
+  
+
+  
+  var diff=cubg-prbg;
+  console.log(diff);
+  if(cubg>=241){ 
+    if(diff > 0){   ///increase bg
+  
+      inf_rate = Number(ini_rate) + Number(3);
+      inf_rate ="Infusion rate = "+ini_rate;
+      console.log("bgi+3 " + inf_rate);
+  }
+  else if(diff > -30 && diff < 0){
+    inf_rate =  Number(ini_rate) + Number(3) ;
+    inf_rate="Infusion rate = " +inf_rate;
+    console.log("bgd+3 " + inf_rate);
+  }
+  else{
+    inf_rate ="Infusion rate = "+ini_rate ;
+    console.log("no ");
+  }
+  }
+  
+    
+  else if(cubg >= 211 && cubg <= 240)
+  {
+    if(diff>1 || (diff<0 && diff>-30 )){
+    inf_rate = Number(ini_rate)+Number(2);
+    inf_rate="Infusion rate = " +inf_rate;
+
+    //document.write("inf_rate"); 
+  }
+    else if(diff<0 && diff<-30){
+      inf_rate ="Infusion rate = "+ini_rate;
+      //document.write("inf_rate");
+  }
+  }
+  
+
+
+  else if(cubg>=181 && cubg<=210)
+  {
+    if(diff > 1 || (diff < 0 && diff > -30 )){
+      inf_rate = Number(ini_rate) + Number(1);
+      inf_rate="Infusion rate = " +inf_rate;
+      //document.write("inf_rate");
+    }
+    else if(diff<0 && diff<-30){
+      inf_rate="Infusion rate = "+ini_rate;
+
+      //document.write("inf_rate");
+  
+    }
+  }
+
+
+
+   else if(cubg>=141 && cubg<=180)
+    {
+      if(prbg>=141 && prbg<=180){
+        inf_rate="Infusion rate = "+ini_rate;
+      }
+    
+
+      else if(diff>=30)
+      {
+        var x=parseInt((25/100)*ini_rate);
+        if(x==0)
+        {
+          x++;
+        }
+        inf_rate=Number(ini_rate) + Number(x);
+         inf_rate="Infusion rate = " +inf_rate;
+
+      }
+      else if(diff>1 && diff<30 || diff<0 && diff >=10){
+        inf_rate="Infusion rate = "+ini_rate;
+      }
+      else if(diff<=-10 && diff>=-50)
+      {
+       inf_rate=Number(ini_rate) -Number(x); 
+        inf_rate="Infusion rate = " +inf_rate;
+      }
+      else if(diff < -50 )
+      {
+        var y= parseInt((50/100)*ini_rate);
+        if(y==0)
+        {
+          y++;
+        }
+        inf_rate=Number(ini_rate) - Number(y);
+         inf_rate="Infusion rate = " +inf_rate;
+      }
+     }
+
+
+
+
+   else if(cubg>=110 && cubg<=140)
+    {
+      if(diff>1){
+        inf_rate="Infusion rate = "+ini_rate;
+      }
+      else if(diff<0){
+        var z= parseInt((50/100)*ini_rate);
+        if(z==0)
+        {
+          z++;
+        }
+        inf_rate=Number(ini_rate) - Number(z);
+         inf_rate="Infusion rate = " +inf_rate;
+      }
+
+    }
+   else if(cubg>=91 && cubg<=109)
+   {
+     if (diff>1){
+     inf_rate= "Infusion rate = "+ini_rate;
+   }
+     else if(diff<0){
+       inf_rate= "Suspend Insulin.Check blood glucose after 1 hour and restart infusion at 50% of previous rate once current BG>140mg/dl." ;
+     }
+     
+   }
+   else if(cubg>=71 && cubg<=90)
+   {
+     inf_rate= "Suspend Insulin.Check blood glucose for 30 minutes till BG>90mg/dl.Restart infusion at 50% of previous rate once BG>140mg/dl." ;
+   }
+   else if(cubg<=70)
+   {
+    var dex= ((100-cubg)*(8/10));
+    inf_rate= "Suspend Insulin. Give " +dex+ "ml of 25% dextrose solution." ;
+
+   }
+
+
+  
+console.log(inf_rate);
+document.getElementById("result2").innerHTML=inf_rate;
+
+  }
+
+  function reload(){
+    window.location.reload();
+} 
+   
+  
+  
+  
+  </script>
+</body>
+
+</html>
